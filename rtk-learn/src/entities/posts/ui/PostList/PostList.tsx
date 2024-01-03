@@ -1,8 +1,18 @@
+import { useState } from 'react';
 import { useCreatePostMutation, useGetPostsQuery } from '../../api/postApi';
 import { IPost } from '../../modal/Post';
 
 const PostList = () => {
-  const { isLoading, isSuccess, data: posts } = useGetPostsQuery(null);
+  const [turnOn, setTurnOn] = useState<boolean>();
+
+  const {
+    isLoading,
+    isSuccess,
+    data: posts
+  } = useGetPostsQuery(null, {
+    refetchOnMountOrArgChange: true,
+    skip: !turnOn
+  });
 
   const [createPost] = useCreatePostMutation();
 
@@ -14,6 +24,10 @@ const PostList = () => {
     });
   };
 
+  const onTurnFetch = () => {
+    setTurnOn(true);
+  };
+
   if (isLoading) {
     return;
   }
@@ -21,6 +35,12 @@ const PostList = () => {
   return (
     <div>
       <h1>Posts</h1>
+      <button
+        disabled={turnOn}
+        onClick={onTurnFetch}
+      >
+        Turn on fetch
+      </button>
       <button onClick={onCreatePost}>Add post</button>
       {isSuccess &&
         posts?.map((post: IPost) => (
