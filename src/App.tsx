@@ -1,21 +1,30 @@
-import PostList from './app/entities/posts/ui/PostList';
-import UsersList from './app/entities/user/ui/UsersList';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-function App() {
-  return (
-    <div
-      style={{
-        display: 'flex'
-      }}
-    >
-      <div style={{ flex: 1 }}>
-        <PostList />
-      </div>
-      <div style={{ flex: 1 }}>
-        <UsersList />
-      </div>
-    </div>
-  );
-}
+import { store } from './app/store/store';
 
-export default App;
+import './index.css';
+
+import PostsPage from './pages/Posts';
+import UsersPage from './pages/Users';
+
+const router = createBrowserRouter([
+  {
+    path: '/posts',
+    element: <PostsPage />
+  },
+  {
+    path: '/users',
+    element: <UsersPage />
+  }
+]);
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </React.StrictMode>
+);

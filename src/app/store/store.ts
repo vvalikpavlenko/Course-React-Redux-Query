@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import postApi from '../entities/posts/api/postApi';
-import userApi from '../entities/user/api/userApi';
+import postApi from '../../entities/posts/api/postApi';
+import userApi from '../../entities/user/api/userApi';
 
 export const store = configureStore({
   reducer: {
