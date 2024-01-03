@@ -1,13 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import type { IUSer } from '../modal/user';
 
-import { IUSer } from '../modal/user';
+import mainApi from '../../../app/store/mainApi';
 
-const userApi = createApi({
-  reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://jsonplaceholder.typicode.com/'
-  }),
-  endpoints: (builder) => ({
+const userApi = mainApi.injectEndpoints({
+  endpoints: builder => ({
     getUsers: builder.query<IUSer[], null>({
       query: () => 'users'
     })

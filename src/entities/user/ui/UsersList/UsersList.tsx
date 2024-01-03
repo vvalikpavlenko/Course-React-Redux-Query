@@ -12,7 +12,7 @@ const UsersList = () => {
       <h1>Users</h1>
       <div>
         {isSuccess &&
-          users?.map((user) => (
+          users?.map(user => (
             <div key={user.id}>
               <h2>{user.username}</h2>
             </div>
