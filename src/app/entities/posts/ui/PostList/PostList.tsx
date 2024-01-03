@@ -3,8 +3,6 @@ import { IPost } from '../../modal/Post';
 
 const PostList = () => {
   const { isLoading, isSuccess, data: posts } = useGetPostsQuery(null);
-  console.log('posts', posts);
-  console.log('isLoading', isLoading);
 
   if (isLoading) {
     return;

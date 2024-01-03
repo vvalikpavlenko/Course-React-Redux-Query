@@ -1,5 +1,5 @@
-import './App.css';
 import PostList from './app/entities/posts/ui/PostList';
+import UsersList from './app/entities/user/ui/UsersList';
 
 function App() {
   return (
@@ -10,6 +10,9 @@ function App() {
     >
       <div style={{ flex: 1 }}>
         <PostList />
+      </div>
+      <div style={{ flex: 1 }}>
+        <UsersList />
       </div>
     </div>
   );

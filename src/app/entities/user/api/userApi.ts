@@ -9,7 +9,7 @@ const userApi = createApi({
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<IUSer[], null>({
-      query: () => 'uses'
+      query: () => 'users'
     })
   })
 });
