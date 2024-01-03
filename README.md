@@ -5,10 +5,12 @@ Link to video [udemy](https://www.udemy.com/course/promotich-middle-front-dev-re
 ## Redux learn
 
 In folder `./rtk-learn`
+
 Code teacher [github](https://github.com/MatVasylenko/rtk-learn)
 
 ## auth learn
 
 In folder `./auth-learn`
+
 Code teacher [github](https://github.com/MatVasylenko/auth-learn)
 
