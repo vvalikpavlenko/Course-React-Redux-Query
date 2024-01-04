@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import userSlice from '../../entities/user/slices/userSlice';
 import { userApi } from '../../entities/user/api/userApi';
 
