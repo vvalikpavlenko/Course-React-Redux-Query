@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_PUBLIC_KEY, API_URL } from '../../../app/network';
-import { IRequestRefreshApi, IRequestRegisterApi, IResponseRegisterApi } from './types';
+import type { IRequestRefreshApi, IRequestRegisterApi, IResponseRegisterApi } from './types';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -32,7 +32,6 @@ export const userApi = createApi({
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('refresh_token', response.refresh_token);
         localStorage.setItem('isAuth', 'true');
-
         return response;
       }
     }),

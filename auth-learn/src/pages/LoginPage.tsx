@@ -1,30 +1,30 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import type { FC } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { useLoginMutation } from '../entities/user/api/userApi';
 
-interface ILoginPageProps {
-
-};
+interface ILoginPageProps {}
 
 type TForm = {
   email: string;
   password: string;
-}
+};
 
-const LoginPage: FC<ILoginPageProps> = ({ }) => {
+const LoginPage: FC<ILoginPageProps> = ({}) => {
   const isAuth = localStorage.getItem('isAuth');
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<TForm>({
     email: '',
-    password: '',
+    password: ''
   });
 
   const [login] = useLoginMutation();
 
   useEffect(() => {
     if (isAuth) {
-      navigate('/posts')
+      navigate('/posts');
     }
   }, [isAuth]);
 
@@ -32,12 +32,12 @@ const LoginPage: FC<ILoginPageProps> = ({ }) => {
     setForm({
       ...form,
       [fieldName]: value
-    })
+    });
   };
 
   const onLogin = () => {
     login(form);
-  }
+  };
 
   return (
     <div className="h-screen flex justify-center items-center flex-col gap-4 ">
@@ -47,7 +47,7 @@ const LoginPage: FC<ILoginPageProps> = ({ }) => {
           <input
             className="border p-2 w-full"
             value={form.email}
-            onChange={(e) => onChange("email", e.target.value)}
+            onChange={e => onChange('email', e.target.value)}
             placeholder="Email"
           />
         </div>
@@ -55,15 +55,25 @@ const LoginPage: FC<ILoginPageProps> = ({ }) => {
           <input
             className="border p-2 w-full"
             value={form.password}
-            onChange={(e) => onChange("password", e.target.value)}
+            onChange={e => onChange('password', e.target.value)}
             placeholder="Password"
           />
         </div>
-        <button className="bg-blue-300 p-2" onClick={onLogin}>Login</button>
-        <Link className="text-center text-sm" to="/register">Register now</Link>
+        <button
+          className="bg-blue-300 p-2"
+          onClick={onLogin}
+        >
+          Login
+        </button>
+        <Link
+          className="text-center text-sm"
+          to="/register"
+        >
+          Register now
+        </Link>
       </div>
     </div>
-  )
+  );
 };
 
 export default LoginPage;

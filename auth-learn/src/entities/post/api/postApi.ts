@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import { API_URL } from '../../../app/network';
-import { IResponseGetPostsApi } from './types';
+import type { IResponseGetPostsApi } from './types';
 
 // get posts
 // if status 200 -> ok give posts
@@ -14,26 +15,24 @@ export const postApi = createApi({
   reducerPath: 'postApi',
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
-    prepareHeaders: (headers) => {
+    prepareHeaders: headers => {
       const token = localStorage.getItem('access_token');
 
-      if (token){
+      if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
 
       return headers;
     }
   }),
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getPosts: builder.query<IResponseGetPostsApi, null>({
       query: () => ({
         url: '/posts',
-        method: 'GET',
+        method: 'GET'
       })
     })
   })
-})
+});
 
-export const {
-  useGetPostsQuery,
-} = postApi;
+export const { useGetPostsQuery } = postApi;
