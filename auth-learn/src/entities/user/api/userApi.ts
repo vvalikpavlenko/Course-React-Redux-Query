@@ -5,14 +5,14 @@ import { IRequestRefreshApi, IRequestRegisterApi, IResponseRegisterApi } from '.
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
+    baseUrl: API_URL
   }),
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     login: builder.mutation<any, any>({
-      query: (body) => ({
+      query: body => ({
         url: '/login',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: IResponseRegisterApi) => {
         localStorage.setItem('access_token', response.access_token);
@@ -23,10 +23,10 @@ export const userApi = createApi({
       }
     }),
     register: builder.mutation<IResponseRegisterApi, IRequestRegisterApi>({
-      query: (body) => ({
+      query: body => ({
         url: `${API_PUBLIC_KEY}/register`,
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: IResponseRegisterApi) => {
         localStorage.setItem('access_token', response.access_token);
@@ -37,15 +37,13 @@ export const userApi = createApi({
       }
     }),
     refresh: builder.mutation<any, IRequestRefreshApi>({
-      query: ({
-        body, access_token
-      }) => ({
+      query: ({ body, access_token }) => ({
         headers: {
-          'Authorization': `Bearer ${access_token}`
+          Authorization: `Bearer ${access_token}`
         },
         url: '/refresh',
         method: 'POST',
-        body,
+        body
       }),
       transformResponse: (response: IResponseRegisterApi) => {
         localStorage.setItem('access_token', response.access_token);
@@ -54,11 +52,8 @@ export const userApi = createApi({
 
         return response;
       }
-    }),
+    })
   })
 });
 
-export const {
-  useLoginMutation,
-  useRegisterMutation,
-} = userApi
+export const { useLoginMutation, useRegisterMutation } = userApi;
