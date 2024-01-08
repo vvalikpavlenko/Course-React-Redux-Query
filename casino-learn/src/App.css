@@ -1,7 +1,5 @@
-body {
-  display: flex;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
 }

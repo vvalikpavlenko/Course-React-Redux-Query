@@ -9,6 +9,7 @@ const Home = () => {
   const data = useAppSelector(selectUserNickname);
 
   const { data: users } = useGetUserQuery({ userId: 2 });
+  console.log('users', users);
 
   return (
     <div className="flex gap-4">
