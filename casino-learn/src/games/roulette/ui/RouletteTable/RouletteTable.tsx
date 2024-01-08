@@ -12,7 +12,7 @@ const RouletteTable = () => {
   };
 
   return (
-    <div className="flex flex-wrap w-[600px]">
+    <div className="flex flex-wrap flex-col-reverse w-[600px] h-[150px]">
       {ROULETTE_TABLE_NUMBERS.map(({ color, number }) => (
         <button
           onClick={() => onClickHandle(number)}
