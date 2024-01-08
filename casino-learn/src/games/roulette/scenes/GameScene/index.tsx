@@ -13,7 +13,7 @@ const RouletteGameScene = () => {
         <Stage
           width={width}
           height={height}
-          options={{ backgroundColor: 'c1c1c1' }}
+          options={{ backgroundColor: 'green' }}
         >
           <RouletteSpinPixi />
         </Stage>
