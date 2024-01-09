@@ -1,13 +1,22 @@
-import { useAppDispatch } from '../../../../app/store/hook';
-import { setBalance } from '../../../../entities/wallet/slices/walletSlices';
+import { useAppDispatch, useAppSelector } from '../../../../app/store/hook';
+import { setRouletteSpinStart } from '../../slices/rouletteSpinSlice';
 
 const EventPanel = () => {
   const dispatch = useAppDispatch();
 
+  const rotationInProgress = useAppSelector(state => state.rouletteSpin.rotationInProgress);
+
   const onClick = () => {
-    dispatch(setBalance(200));
+    dispatch(setRouletteSpinStart());
   };
 
-  return <button onClick={onClick}>Start</button>;
+  return (
+    <button
+      disabled={rotationInProgress}
+      onClick={onClick}
+    >
+      Start
+    </button>
+  );
 };
 export default EventPanel;

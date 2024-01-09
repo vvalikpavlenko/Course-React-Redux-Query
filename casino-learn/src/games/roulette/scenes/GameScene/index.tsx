@@ -1,4 +1,4 @@
-import { Stage } from '@pixi/react';
+import { Stage } from '../../../../app/config/ContextBridge';
 import RouletteSpinPixi from '../../pixi/RouletteSpin';
 
 import GameSceneUI from './GameSceneUI';

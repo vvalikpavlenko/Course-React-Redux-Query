@@ -6,6 +6,8 @@ import externalCircleImage from '../../../../assets/roulette/external-circle.png
 import internalCircleImage from '../../../../assets/roulette/internal-circle.png';
 import mediumCircleImage from '../../../../assets/roulette/medium-circle.png';
 import wheelImage from '../../../../assets/roulette/wheel.png';
+import { useAppSelector } from '../../../../app/store/hook';
+import { selectRouletteSpinSpeed } from '../../slices/rouletteSpinSlice';
 
 const POSITION_SPIN = {
   x: 200,
@@ -19,14 +21,14 @@ const POSITION_ARROw = {
   rotation: 0.4
 };
 
-const SPEED = 0.05;
-
 const RouletteSpinPixi = () => {
+  const speed = useAppSelector(selectRouletteSpinSpeed);
+
   const [rotationMedium, setRotationMedium] = useState<number>(0);
   const [rotationWheel, setRotationWheel] = useState<number>(0);
 
   useTick(delta => {
-    const rotation = delta * SPEED;
+    const rotation = delta * speed;
     setRotationMedium(prev => prev + rotation);
     setRotationWheel(prev => prev - rotation);
   });
