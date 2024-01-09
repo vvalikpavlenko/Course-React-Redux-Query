@@ -12,7 +12,7 @@ const walletSlice = createSlice({
   name: 'wallet',
   reducers: {
     setBalance: (state, action: PayloadAction<number>) => {
-      state.game_balance = action.payload;
+      state.game_balance = state.game_balance + action.payload;
     }
   }
 });
