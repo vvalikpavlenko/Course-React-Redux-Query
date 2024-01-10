@@ -1,13 +1,21 @@
 import { useState } from 'react';
 import { Container, Sprite, useTick } from '@pixi/react';
 
+import { useAppDispatch, useAppSelector } from '../../../../app/store/hook';
+import {
+  selectRouletteSpinRotationInProgress,
+  selectRouletteSpinSpeed,
+  setRouletteSpinDegreesRotation,
+  setRouletteSpinSpeed
+} from '../../slices/rouletteSpinSlice';
+import { radianToDegrees } from '../../../../shared/lib/degrees/radianToDegrees';
+
 import arrowImage from '../../../../assets/roulette/arrow.png';
 import externalCircleImage from '../../../../assets/roulette/external-circle.png';
 import internalCircleImage from '../../../../assets/roulette/internal-circle.png';
 import mediumCircleImage from '../../../../assets/roulette/medium-circle.png';
 import wheelImage from '../../../../assets/roulette/wheel.png';
-import { useAppSelector } from '../../../../app/store/hook';
-import { selectRouletteSpinSpeed } from '../../slices/rouletteSpinSlice';
+import { RouletteLifecycle, setRouletteLifecycle } from '../../slices/rouletteSlice';
 
 const POSITION_SPIN = {
   x: 200,
@@ -15,22 +23,35 @@ const POSITION_SPIN = {
   anchor: 0.5
 };
 
-const POSITION_ARROw = {
-  x: 280,
-  y: 190,
-  rotation: 0.4
+const POSITION_ARROW = {
+  x: 200,
+  y: 170,
+  rotation: -0.45,
+  anchor: 0.5
 };
 
 const RouletteSpinPixi = () => {
   const speed = useAppSelector(selectRouletteSpinSpeed);
+  const rotationInProgress = useAppSelector(selectRouletteSpinRotationInProgress);
+
+  const dispatch = useAppDispatch();
 
   const [rotationMedium, setRotationMedium] = useState<number>(0);
   const [rotationWheel, setRotationWheel] = useState<number>(0);
 
   useTick(delta => {
-    const rotation = delta * speed;
-    setRotationMedium(prev => prev + rotation);
-    setRotationWheel(prev => prev - rotation);
+    if (rotationInProgress) {
+      const rotation = delta * speed;
+      setRotationMedium(prev => prev + rotation);
+      setRotationWheel(prev => prev - rotation);
+      if (speed < 0.005) {
+        dispatch(setRouletteSpinSpeed(0));
+        dispatch(setRouletteSpinDegreesRotation(radianToDegrees(rotationMedium % (Math.PI * 2))));
+        dispatch(setRouletteLifecycle(RouletteLifecycle.FINISHED));
+      } else {
+        dispatch(setRouletteSpinSpeed(null));
+      }
+    }
   });
 
   return (
@@ -55,7 +76,7 @@ const RouletteSpinPixi = () => {
       />
       <Sprite
         image={arrowImage}
-        {...POSITION_ARROw}
+        {...POSITION_ARROW}
       />
     </Container>
   );

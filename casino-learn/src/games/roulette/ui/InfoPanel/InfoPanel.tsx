@@ -45,7 +45,6 @@ const InfoPanel = () => {
   const balance = useAppSelector(selectBalance);
 
   const colorActive = ROULETTE_TABLE_NUMBERS.find(element => element.number === activeNumber);
-  console.log('colorActive', colorActive);
 
   return (
     <div className="flex justify-between px-10">

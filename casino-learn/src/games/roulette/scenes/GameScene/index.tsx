@@ -1,4 +1,4 @@
-import { Stage } from '../../../../app/config/ContextBridge';
+import { Stage } from '../../../../app/config/contextBridge';
 import RouletteSpinPixi from '../../pixi/RouletteSpin';
 
 import GameSceneUI from './GameSceneUI';
