@@ -4,7 +4,7 @@ import { IWallet } from '../type/Wallet';
 import { RootState } from '../../../app/store';
 
 const initialState: IWallet = {
-  game_balance: 0
+  game_balance: 5000
 };
 
 const walletSlice = createSlice({

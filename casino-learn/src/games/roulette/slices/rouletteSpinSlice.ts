@@ -65,5 +65,6 @@ export const {
 
 export const selectRouletteSpinSpeed = (state: RootState) => state.rouletteSpin.speed;
 export const selectRouletteSpinRotationInProgress = (state: RootState) => state.rouletteSpin.rotationInProgress;
+export const selectRouletteSpinCurrentNumber = (state: RootState) => state.rouletteSpin.currentNumber;
 
 export default rouletteSpinSlice.reducer;
