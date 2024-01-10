@@ -18,7 +18,7 @@ interface InitialState {
   readonly winBed: number;
   lifecycle: `${RouletteLifecycle}`;
   winOrLose: `${RouletteWinOrLose}` | null;
-  activeNumber: number;
+  activeNumber: number | null;
   currentBet: number;
 }
 
@@ -26,7 +26,7 @@ const initialState: InitialState = {
   winBed: 36,
   winOrLose: null,
   lifecycle: RouletteLifecycle.READY_TO_START,
-  activeNumber: 0,
+  activeNumber: null,
   currentBet: 0
 };
 
@@ -49,11 +49,16 @@ const rouletteSlice = createSlice({
     },
     setWinOrLose: (state, active: PayloadAction<InitialState['winOrLose']>) => {
       state.winOrLose = active.payload;
+    },
+    clearRoulette: state => {
+      state.activeNumber = initialState.activeNumber;
+      state.currentBet = initialState.currentBet;
     }
   }
 });
 
-export const { setActiveNumber, setCurrentBet, setRouletteLifecycle, setWinOrLose } = rouletteSlice.actions;
+export const { setActiveNumber, setCurrentBet, setRouletteLifecycle, setWinOrLose, clearRoulette } =
+  rouletteSlice.actions;
 
 export const selectActiveNumber = (state: RootState) => state.roulette.activeNumber;
 export const selectCurrentBet = (state: RootState) => state.roulette.currentBet;

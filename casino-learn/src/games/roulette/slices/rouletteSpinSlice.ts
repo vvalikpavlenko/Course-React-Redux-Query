@@ -8,7 +8,7 @@ interface IRouletteSpin {
   speed: number;
   rotationInProgress: boolean;
   degreesRotation: number;
-  currentNumber: number;
+  currentNumber: number | null;
 }
 
 export const ROULETTE_NUMBERS: number[] = [
@@ -22,7 +22,7 @@ const initialState: IRouletteSpin = {
   speed: 0,
   rotationInProgress: false,
   degreesRotation: 0,
-  currentNumber: 0
+  currentNumber: null
 };
 
 const rouletteSpinSlice = createSlice({
@@ -51,7 +51,9 @@ const rouletteSpinSlice = createSlice({
       const deltaIndex = Math.floor((action.payload + state.stepCircle / 2) / state.stepCircle);
       const currentIndex = state.rouletteNumbers.length - deltaIndex;
       state.currentNumber = state.rouletteNumbers[currentIndex];
-      console.log(state.currentNumber);
+    },
+    clearRouletteSpin: state => {
+      state.currentNumber = initialState.currentNumber;
     }
   }
 });
@@ -60,7 +62,8 @@ export const {
   setRouletteSpinSpeed,
   setRouletteSpinRotationInProgress,
   setRouletteSpinDegreesRotation,
-  setRouletteSpinStart
+  setRouletteSpinStart,
+  clearRouletteSpin
 } = rouletteSpinSlice.actions;
 
 export const selectRouletteSpinSpeed = (state: RootState) => state.rouletteSpin.speed;

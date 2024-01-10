@@ -4,13 +4,14 @@ import { useAppDispatch, useAppSelector } from '../../../../app/store/hook';
 import {
   RouletteLifecycle,
   RouletteWinOrLose,
+  clearRoulette,
   selectActiveNumber,
   selectRouletteLifecycle,
   selectRouletteWinNumber,
   setRouletteLifecycle,
   setWinOrLose
 } from '../../slices/rouletteSlice';
-import { selectRouletteSpinCurrentNumber } from '../../slices/rouletteSpinSlice';
+import { clearRouletteSpin, selectRouletteSpinCurrentNumber } from '../../slices/rouletteSpinSlice';
 import { setBalance } from '../../../../entities/wallet/slices/walletSlices';
 
 interface GameSceneActionsProviderProps {
@@ -27,7 +28,7 @@ const GameSceneActionsProvider: FC<GameSceneActionsProviderProps> = ({ children 
   const winBed = useAppSelector(selectRouletteWinNumber);
 
   useEffect(() => {
-    if (lifecycle === RouletteLifecycle.FINISHED) {
+    if (lifecycle === RouletteLifecycle.FINISHED && typeof currentBet === 'number') {
       if (activeNumber === currentNumber) {
         // Win case
         dispatch(setBalance(currentBet * winBed));
@@ -40,6 +41,16 @@ const GameSceneActionsProvider: FC<GameSceneActionsProviderProps> = ({ children 
       dispatch(setRouletteLifecycle(RouletteLifecycle.INFO));
     }
   }, [lifecycle, dispatch, activeNumber, currentNumber, currentBet, winBed]);
+
+  useEffect(() => {
+    if (lifecycle === RouletteLifecycle.INFO) {
+      setTimeout(() => {
+        dispatch(setRouletteLifecycle(RouletteLifecycle.READY_TO_START));
+        dispatch(clearRoulette());
+        dispatch(clearRouletteSpin());
+      }, 3000);
+    }
+  }, [lifecycle, dispatch]);
 
   return children;
 };
