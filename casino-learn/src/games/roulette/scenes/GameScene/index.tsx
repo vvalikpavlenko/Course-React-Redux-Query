@@ -14,6 +14,7 @@ import soundRouletteSpin from '../../../../assets/sounds/roulette/spin.mp3';
 import { SOUNDS_ROULETTE } from './config';
 
 import GameSceneUI from './GameSceneUI';
+import BgPX from '../../pixi/Bg/Bg';
 
 const [width, height] = [1150, 500];
 
@@ -41,6 +42,7 @@ const RouletteGameScene = () => {
             height={height}
             options={{ backgroundColor: 'green' }}
           >
+            <BgPX />
             <RouletteSpinPixi />
           </Stage>
         </GameSceneUI>

@@ -4,9 +4,11 @@ import { ROUTS } from '../../app/router/utils';
 
 import CoreGameRoulette from '../../games/roulette';
 
+import style from './index.module.scss';
+
 const Roulette = () => {
   return (
-    <div>
+    <div className={style.roulette}>
       <Link to={ROUTS.main}>Return to home</Link>
       <CoreGameRoulette />
     </div>
