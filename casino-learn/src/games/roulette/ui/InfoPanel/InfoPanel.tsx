@@ -9,6 +9,7 @@ import balance from '../../../../assets/roulette/Cash.png';
 import winBetImage from '../../../../assets/roulette/WinBest.svg';
 import betImage from '../../../../assets/roulette/Bet.png';
 import activeNumberImage from '../../../../assets/roulette/activeNumber.png';
+import ScoreWindow from '../../shared/ScoreWindow';
 
 interface IPanel {
   id: string;
@@ -67,7 +68,7 @@ const InfoPanel = () => {
         return (
           <div key={id}>
             <div>{title}</div>
-            <div className="flex">
+            <ScoreWindow icon={icon}>
               <div className={twMerge(id === 'activeNumber' && 'flex gap-3 items-center')}>
                 {bodyPanel}
                 {id === 'activeNumber' && colorActive && (
@@ -87,11 +88,7 @@ const InfoPanel = () => {
                   </svg>
                 )}
               </div>
-              <img
-                src={icon}
-                alt={title}
-              />
-            </div>
+            </ScoreWindow>
           </div>
         );
       })}

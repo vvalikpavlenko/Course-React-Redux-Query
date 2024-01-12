@@ -4,7 +4,7 @@ import GameSceneActionsProvider from './GameSceneActionsProvider';
 
 import GameSceneUI from './GameSceneUI';
 
-const [width, height] = [1100, 500];
+const [width, height] = [1150, 500];
 
 const RouletteGameScene = () => {
   return (

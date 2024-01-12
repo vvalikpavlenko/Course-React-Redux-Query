@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../../../app/store/hook';
+import RouletteStartButton from '../../shared/button/RouletteStartButton';
 import {
   RouletteLifecycle,
   RouletteWinOrLose,
@@ -21,7 +22,7 @@ const EventPanel = () => {
 
   return (
     <>
-      {lifecycle === RouletteLifecycle.READY_TO_START && <button onClick={onStart}>Start</button>}
+      {lifecycle === RouletteLifecycle.READY_TO_START && <RouletteStartButton onClick={onStart} />}
       {lifecycle === RouletteLifecycle.PAY && <p>Playing...</p>}
       {lifecycle === RouletteLifecycle.FINISHED && <p>Calculation </p>}
       {lifecycle === RouletteLifecycle.INFO && (
