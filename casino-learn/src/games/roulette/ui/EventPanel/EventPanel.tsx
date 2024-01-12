@@ -1,3 +1,4 @@
+import { sound } from '@pixi/sound';
 import { useAppDispatch, useAppSelector } from '../../../../app/store/hook';
 import RouletteStartButton from '../../shared/button/RouletteStartButton';
 import {
@@ -9,6 +10,8 @@ import {
 } from '../../slices/rouletteSlice';
 import { selectRouletteSpinCurrentNumber, setRouletteSpinStart } from '../../slices/rouletteSpinSlice';
 
+import { SOUNDS_ROULETTE } from '../../scenes/GameScene/config';
+
 const EventPanel = () => {
   const dispatch = useAppDispatch();
   const lifecycle = useAppSelector(selectRouletteLifecycle);
@@ -18,6 +21,7 @@ const EventPanel = () => {
   const onStart = () => {
     dispatch(setRouletteSpinStart());
     dispatch(setRouletteLifecycle(RouletteLifecycle.PAY));
+    sound.play(SOUNDS_ROULETTE.SPIN);
   };
 
   return (

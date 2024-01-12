@@ -1,13 +1,19 @@
 import { twMerge } from 'tailwind-merge';
+import { sound } from '@pixi/sound';
 
 import { ROULETTE_TABLE_NUMBERS } from './initData';
 import { useAppDispatch, useAppSelector } from '../../../../app/store/hook';
 import { selectActiveNumber, setActiveNumber } from '../../slices/rouletteSlice';
 
+import { SOUNDS_ROULETTE } from '../../scenes/GameScene/config';
+
 const RouletteTable = () => {
   const activeNumber = useAppSelector(selectActiveNumber);
+
   const dispatch = useAppDispatch();
+
   const onClickHandle = (number: number) => {
+    sound.play(SOUNDS_ROULETTE.NUMBER);
     dispatch(setActiveNumber(number));
   };
 

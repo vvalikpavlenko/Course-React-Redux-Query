@@ -1,6 +1,9 @@
-import { useAppDispatch } from '../../../../app/store/hook';
+import { sound } from '@pixi/sound';
 
+import { useAppDispatch } from '../../../../app/store/hook';
 import { setCurrentBet } from '../../slices/rouletteSlice';
+
+import { SOUNDS_ROULETTE } from '../../scenes/GameScene/config';
 
 import bets50Image from '../../../../assets/roulette/bet-50.png';
 import bets100Image from '../../../../assets/roulette/bet-100.png';
@@ -42,6 +45,7 @@ const BetsPanel = () => {
   const dispatch = useAppDispatch();
 
   const pickBet = (value: IBETS['value']) => {
+    sound.play(SOUNDS_ROULETTE.BET);
     dispatch(setCurrentBet(value));
   };
 

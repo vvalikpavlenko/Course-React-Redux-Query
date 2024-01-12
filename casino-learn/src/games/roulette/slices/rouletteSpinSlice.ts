@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store';
+import { sound } from '@pixi/sound';
+import { SOUNDS_ROULETTE } from '../scenes/GameScene/config';
 
 interface IRouletteSpin {
   readonly rouletteNumbers: number[];
@@ -39,6 +41,7 @@ const rouletteSpinSlice = createSlice({
       if (speed === 0) {
         state.speed = 0;
         state.rotationInProgress = false;
+        sound.stop(SOUNDS_ROULETTE.SPIN);
       } else {
         state.speed = state.speed - state.speed / 150;
       }
