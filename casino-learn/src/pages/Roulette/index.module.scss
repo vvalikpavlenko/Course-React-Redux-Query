@@ -1,0 +1,10 @@
+.roulette {
+  background-image: url('/src/assets/roulette/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

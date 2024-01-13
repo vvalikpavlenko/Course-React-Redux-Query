@@ -1,10 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import userSlice from '../../entities/user/slices/userSlice';
 import { userApi } from '../../entities/user/api/userApi';
+import walletSlices from '../../entities/wallet/slices/walletSlices';
+
+import rouletteSlice from '../../games/roulette/slices/rouletteSlice';
+import rouletteSpinSlice from '../../games/roulette/slices/rouletteSpinSlice';
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
+    wallet: walletSlices,
+    roulette: rouletteSlice,
+    rouletteSpin: rouletteSpinSlice,
     [userApi.reducerPath]: userApi.reducer
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(userApi.middleware)

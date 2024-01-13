@@ -1,8 +1,7 @@
-// Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { BASE_URL } from '../../../app/config/network';
-import { IUser } from '../model/User';
+import { IUser } from '../type/User';
 
 interface IRequestGetUser {
   userId: IUser['id'];

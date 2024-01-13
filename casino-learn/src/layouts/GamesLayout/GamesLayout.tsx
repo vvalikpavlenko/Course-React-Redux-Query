@@ -1,11 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
 const GamesLayout = () => {
-  return (
-    <>
-      GamesLayout
-      <Outlet />
-    </>
-  );
+  return <Outlet />;
 };
 export default GamesLayout;
