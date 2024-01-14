@@ -14,6 +14,7 @@ interface IRowPXProps {
 
 const ITEM_HEIGHT: number = 100;
 const SPEED: number = 40;
+const DELTA_ALIGN_CENTER = ITEM_HEIGHT * 2;
 
 const OPTIONS_SPRITE = {
   x: 0,
@@ -27,7 +28,7 @@ const RowPX: FC<IRowPXProps> = ({ slotRow, rowID, activeItemID }) => {
 
   const FULL_HEIGHT_ROW = slotRow.length * ITEM_HEIGHT;
   const currentIndexRowItem = slotRow.findIndex(rowItem => rowItem.id === activeItemID);
-  const currentPosition = currentIndexRowItem * ITEM_HEIGHT;
+  const currentPosition = -(currentIndexRowItem * ITEM_HEIGHT - DELTA_ALIGN_CENTER);
   const startPosition = currentPosition - FULL_HEIGHT_ROW;
   const speed = isPlaying || isStopping ? SPEED : 0;
 
@@ -41,7 +42,16 @@ const RowPX: FC<IRowPXProps> = ({ slotRow, rowID, activeItemID }) => {
       setPosition(prevState => prevState + speed * delta);
     }
     if (isStopping && !fixPosition) {
-      fixPosition(true);
+      setPosition(startPosition);
+      setFixPosition(true);
+    }
+    if (isStopping && fixPosition) {
+      const koefC = currentPosition - position;
+      if (koefC > 0) {
+        setPosition(position + speed * delta);
+      } else {
+        setPosition(currentPosition);
+      }
     }
   });
 
