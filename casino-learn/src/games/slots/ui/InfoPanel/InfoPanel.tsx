@@ -1,8 +1,8 @@
-import { selectBalance } from '../../../../entities/wallet/slices/walletSlice';
+import { useEffect, useState } from 'react';
 
+import { selectBalance } from '../../../../entities/wallet/slices/walletSlice';
 import { useAppSelector } from '../../../../app/store/hook';
 import { SlotLifecycle, selectSlotCurrentBet, selectSlotLifecycle } from '../../slices/slotSlice';
-import { useEffect, useState } from 'react';
 
 const InfoPanel = () => {
   const balance = useAppSelector(selectBalance);
@@ -15,7 +15,7 @@ const InfoPanel = () => {
     if (lifecycle === SlotLifecycle.INFO) {
       setDisplayBalance(balance);
     }
-  }, [lifecycle, balance ]);
+  }, [lifecycle, balance]);
 
   return (
     <div>
