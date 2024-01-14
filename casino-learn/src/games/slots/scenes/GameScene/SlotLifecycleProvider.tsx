@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import type { FC, ReactNode } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../../../app/store/hook';
-import { SlotLifecycle, selectSlotLifecycle, setSlotLifecycle } from '../../slices/slotSlice';
+import { SlotLifecycle, selectSlotLifecycle, setSlotCurrentBet, setSlotLifecycle } from '../../slices/slotSlice';
 
 interface ISlotLifecycleProviderProps {
   children: ReactNode;
@@ -43,6 +43,7 @@ const SlotLifecycleProvider: FC<ISlotLifecycleProviderProps> = ({ children }) =>
     if (lifecycle === SlotLifecycle.INFO) {
       setTimeout(() => {
         dispatch(setSlotLifecycle(SlotLifecycle.READY_TO_START));
+        dispatch(setSlotCurrentBet(0));
       }, 3000);
     }
   }, [lifecycle, dispatch]);

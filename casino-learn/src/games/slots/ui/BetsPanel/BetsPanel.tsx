@@ -1,73 +1,58 @@
-import { sound } from '@pixi/sound';
-
 import { useAppDispatch } from '../../../../app/store/hook';
-// import { setCurrentBet } from '../../slices/rouletteSlice';
+import { setSlotCurrentBet } from '../../slices/slotSlice';
 
-import { SOUNDS_ROULETTE } from '../../scenes/GameScene/config';
+import bet50 from '../../../../assets/roulette/bet-50.png';
+import bet100 from '../../../../assets/roulette/bet-100.png';
+import bet200 from '../../../../assets/roulette/bet-200.png';
+import bet400 from '../../../../assets/roulette/bet-400.png';
+import bet800 from '../../../../assets/roulette/bet-800.png';
 
-import bets50Image from '../../../../assets/roulette/bet-50.png';
-import bets100Image from '../../../../assets/roulette/bet-100.png';
-import bets200Image from '../../../../assets/roulette/bet-200.png';
-import bets400Image from '../../../../assets/roulette/bet-400.png';
-import bets800Image from '../../../../assets/roulette/bet-800.png';
-
-import styles from './BetsPanel.module.scss';
-
-interface IBETS {
-  value: number;
-  image: string;
-}
-
-const BETS: IBETS[] = [
+const BETS = [
   {
     value: 50,
-    image: bets50Image
+    image: bet50
   },
   {
     value: 100,
-    image: bets100Image
+    image: bet100
   },
   {
     value: 200,
-    image: bets200Image
+    image: bet200
   },
   {
     value: 400,
-    image: bets400Image
+    image: bet400
   },
   {
     value: 800,
-    image: bets800Image
+    image: bet800
   }
 ];
 
-const BetsPanel = () => {
+const SlotBetsPanel = () => {
   const dispatch = useAppDispatch();
-
-  const pickBet = (value: IBETS['value']) => {
-    sound.play(SOUNDS_ROULETTE.BET);
-    // dispatch(setCurrentBet(value));
+  const pickBet = (value: number) => {
+    // sound.play(SOUNDS_ROULETTE.BET);
+    dispatch(setSlotCurrentBet(value));
   };
-
   return (
-    <div>
-      <div className="flex flex-col gap-3 items-center">
-        {BETS.map(({ value, image }) => (
-          <div
-            onClick={() => pickBet(value)}
-            onContextMenu={e => {
-              e.preventDefault();
-              pickBet(-value);
-            }}
-            key={value}
-            className="cursor-pointer hover:scale-[1.05] transition-all"
-          >
-            <img src={image} />
-          </div>
-        ))}
-      </div>
+    <div className="flex flex-col gap-3 items-center">
+      {BETS.map(({ value, image }) => (
+        <div
+          onClick={() => pickBet(value)}
+          onContextMenu={e => {
+            e.preventDefault();
+            pickBet(-value);
+          }}
+          key={value}
+          className="cursor-pointer hover:scale-[1.05] transition-all"
+        >
+          <img src={image} />
+        </div>
+      ))}
     </div>
   );
 };
 
-export default BetsPanel;
+export default SlotBetsPanel;
