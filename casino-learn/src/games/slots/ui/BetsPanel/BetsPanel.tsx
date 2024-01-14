@@ -7,6 +7,8 @@ import bet200 from '../../../../assets/roulette/bet-200.png';
 import bet400 from '../../../../assets/roulette/bet-400.png';
 import bet800 from '../../../../assets/roulette/bet-800.png';
 
+import styles from './BetsPanel.module.scss';
+
 const BETS = [
   {
     value: 50,
@@ -37,20 +39,22 @@ const SlotBetsPanel = () => {
     dispatch(setSlotCurrentBet(value));
   };
   return (
-    <div className="flex flex-col gap-3 items-center">
-      {BETS.map(({ value, image }) => (
-        <div
-          onClick={() => pickBet(value)}
-          onContextMenu={e => {
-            e.preventDefault();
-            pickBet(-value);
-          }}
-          key={value}
-          className="cursor-pointer hover:scale-[1.05] transition-all"
-        >
-          <img src={image} />
-        </div>
-      ))}
+    <div className={styles.wrapper}>
+      <div className="flex gap-5 items-center">
+        {BETS.map(({ value, image }) => (
+          <div
+            onClick={() => pickBet(value)}
+            onContextMenu={e => {
+              e.preventDefault();
+              pickBet(-value);
+            }}
+            key={value}
+            className="cursor-pointer hover:scale-[1.05] transition-all"
+          >
+            <img src={image} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

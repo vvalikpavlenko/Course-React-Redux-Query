@@ -1,14 +1,17 @@
-import { Link } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
-import { ROUTS } from '../../app/router/utils';
+import CoreGameRoulette from '../.././games/slots';
+import titleImage from '../../assets/slot/title.svg';
 
-import SlotGameScene from '../../games/slots/scenes/GameScene';
+import styles from './Slots.module.scss';
 
 const Slots = () => {
   return (
-    <div>
-      <Link to={ROUTS.main}>return to Home</Link>
-      <SlotGameScene />
+    <div className={twMerge('h-screen flex justify-center items-center relative', styles.slots)}>
+      <div className="absolute top-[5%] left-[50%] translate-x-[-50%] z-10">
+        <img src={titleImage} />
+      </div>
+      <CoreGameRoulette />
     </div>
   );
 };

@@ -18,7 +18,8 @@ const DELTA_ALIGN_CENTER = ITEM_HEIGHT * 2;
 
 const OPTIONS_SPRITE = {
   x: 0,
-  scale: 0.5
+  scale: 0.5,
+  anchor: 0.5
 };
 
 const RowPX: FC<IRowPXProps> = ({ slotRow, rowID, activeItemID }) => {

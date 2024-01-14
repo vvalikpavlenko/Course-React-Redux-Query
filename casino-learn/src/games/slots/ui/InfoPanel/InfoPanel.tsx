@@ -1,27 +1,26 @@
-import { useEffect, useState } from 'react';
-
-import { selectBalance } from '../../../../entities/wallet/slices/walletSlice';
+import { useState } from 'react';
 import { useAppSelector } from '../../../../app/store/hook';
 import { SlotLifecycle, selectSlotCurrentBet, selectSlotLifecycle } from '../../slices/slotSlice';
+import { selectBalance } from '../../../../entities/wallet/slices/walletSlice';
+import { useEffect } from 'react';
+import SlotScoreWindow from '../../shared/ScoreWindow';
 
-const InfoPanel = () => {
-  const balance = useAppSelector(selectBalance);
+const SlotInfoPanel = () => {
   const currentBet = useAppSelector(selectSlotCurrentBet);
+  const balance = useAppSelector(selectBalance);
+  const [displayBalance, setDisplayBalance] = useState(balance);
   const lifecycle = useAppSelector(selectSlotLifecycle);
-
-  const [displayBalance, setDisplayBalance] = useState<number>(balance);
+  const isInfo = lifecycle === SlotLifecycle.INFO;
 
   useEffect(() => {
-    if (lifecycle === SlotLifecycle.INFO) {
-      setDisplayBalance(balance);
-    }
-  }, [lifecycle, balance]);
-
+    if (isInfo) setDisplayBalance(balance);
+  }, [isInfo, balance]);
   return (
-    <div>
-      <div>Balance: {displayBalance}</div>
-      <div>Current Bet: {currentBet}</div>
+    <div className="flex flex-col gap-8">
+      <SlotScoreWindow icon="balance">{displayBalance ?? 0}</SlotScoreWindow>
+      <SlotScoreWindow icon="bets">{currentBet ?? 0}</SlotScoreWindow>
     </div>
   );
 };
-export default InfoPanel;
+
+export default SlotInfoPanel;
