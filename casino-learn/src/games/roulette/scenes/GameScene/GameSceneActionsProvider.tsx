@@ -12,7 +12,7 @@ import {
   setWinOrLose
 } from '../../slices/rouletteSlice';
 import { clearRouletteSpin, selectRouletteSpinCurrentNumber } from '../../slices/rouletteSpinSlice';
-import { setBalance } from '../../../../entities/wallet/slices/walletSlices';
+import { setBalance } from '../../../../entities/wallet/slices/walletSlice';
 
 interface GameSceneActionsProviderProps {
   children: ReactNode;

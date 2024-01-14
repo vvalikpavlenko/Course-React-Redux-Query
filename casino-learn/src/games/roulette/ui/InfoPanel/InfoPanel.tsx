@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 
 import { useAppSelector } from '../../../../app/store/hook';
-import { selectBalance } from '../../../../entities/wallet/slices/walletSlices';
+import { selectBalance } from '../../../../entities/wallet/slices/walletSlice';
 import { selectActiveNumber, selectCurrentBet } from '../../slices/rouletteSlice';
 import { ROULETTE_TABLE_NUMBERS } from '../RouletteTable/initData';
 
