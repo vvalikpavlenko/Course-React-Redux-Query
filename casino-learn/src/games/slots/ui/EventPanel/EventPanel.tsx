@@ -1,10 +1,11 @@
-import { useAppSelector } from '../../../../app/store/hook';
-import { SlotLifecycle, selectSlotLifecycle } from '../../slices/slotSlice';
+import { useAppDispatch, useAppSelector } from '../../../../app/store/hook';
+import { SlotLifecycle, selectSlotLifecycle, startSlot } from '../../slices/slotSlice';
 
 const EventPanel = () => {
   const lifecycle = useAppSelector(selectSlotLifecycle);
+  const dispatch = useAppDispatch();
   const onStart = () => {
-    
+    dispatch(startSlot());
   };
   return <div>{lifecycle === SlotLifecycle.READY_TO_START && <button onClick={onStart}>Go!</button>}</div>;
 };

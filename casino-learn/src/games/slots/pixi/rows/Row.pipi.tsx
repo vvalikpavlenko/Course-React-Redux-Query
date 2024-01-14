@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import { Container, Sprite, useTick } from '@pixi/react';
 
 import { TSlotRow } from './utils';
+import { useAppSelector } from '../../../../app/store/hook';
+import { SlotLifecycle, selectSlotLifecycle } from '../../slices/slotSlice';
 
 interface IRowPXProps {
   rowID: number;
@@ -11,23 +13,38 @@ interface IRowPXProps {
 }
 
 const ITEM_HEIGHT: number = 100;
-const SPEED: number = 0;
+const SPEED: number = 40;
 
 const OPTIONS_SPRITE = {
   x: 0,
   scale: 0.5
 };
 
-const RowPX: FC<IRowPXProps> = ({ slotRow, rowID }) => {
+const RowPX: FC<IRowPXProps> = ({ slotRow, rowID, activeItemID }) => {
+  const lifecycle = useAppSelector(selectSlotLifecycle);
+  const isStopping = lifecycle === SlotLifecycle.STOPPING;
+  const isPlaying = lifecycle === SlotLifecycle.PLAY;
+
   const FULL_HEIGHT_ROW = slotRow.length * ITEM_HEIGHT;
-  const [position, setPosition] = useState(-FULL_HEIGHT_ROW);
+  const currentIndexRowItem = slotRow.findIndex(rowItem => rowItem.id === activeItemID);
+  const currentPosition = currentIndexRowItem * ITEM_HEIGHT;
+  const startPosition = currentPosition - FULL_HEIGHT_ROW;
+  const speed = isPlaying || isStopping ? SPEED : 0;
+
+  const [position, setPosition] = useState<number>(-FULL_HEIGHT_ROW);
+  const [fixPosition, setFixPosition] = useState<boolean>(false);
+
   useTick(delta => {
     if (position >= FULL_HEIGHT_ROW) {
       setPosition(-FULL_HEIGHT_ROW);
     } else {
-      setPosition(prevState => prevState + SPEED * delta);
+      setPosition(prevState => prevState + speed * delta);
+    }
+    if (isStopping && !fixPosition) {
+      fixPosition(true);
     }
   });
+
   return (
     <Container
       x={(rowID - 1) * 120}

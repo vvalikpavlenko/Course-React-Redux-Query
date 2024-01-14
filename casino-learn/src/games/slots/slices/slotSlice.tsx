@@ -67,7 +67,7 @@ const slotSlice = createSlice({
   }
 });
 
-export const { setSlotLifecycle } = slotSlice.actions;
+export const { setSlotLifecycle, startSlot } = slotSlice.actions;
 
 export const selectSlotLifecycle = (state: RootState) => state.slot.lifecycle;
 export const selectSlotRows = (state: RootState) => state.slot.rows;
