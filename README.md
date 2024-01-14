@@ -17,3 +17,5 @@ Code teacher [github](https://github.com/MatVasylenko/auth-learn)
 ## Casino learn
 
 In folder `./casino-learn`
+
+Code teacher [github](https://github.com/MatVasylenko/casino-learn)
